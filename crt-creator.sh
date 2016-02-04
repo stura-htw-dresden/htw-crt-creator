@@ -44,5 +44,15 @@ openssl req -new -sha256 -subj \
     "/CN=${CN}/emailAddress=${emailAddress}/O=Hochschule fuer Technik und Wirtschaft Dresden (FH)/L=Dresden/ST=Sachsen/C=DE/" \
     -key ${CN}.key -out ${CN}.csr
 
+
+echo -e "
+===============================================================================
+Apache 2 Configuration:
+LoadModule headers_module modules/mod_headers.so
+
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security \"max-age=15768000; includeSubdomains; preload;\"
+</IfModule>
+"
 _exit $?;
 exit 0;
